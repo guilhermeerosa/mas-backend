@@ -3,7 +3,7 @@ import {v4 as uuid} from "uuid";
 
 import { Activy } from "./Activy";
 
-@Entity("course_unit")
+@Entity("course_units")
 class CourseUnit {
 
     constructor(){
@@ -25,7 +25,7 @@ class CourseUnit {
     created_at: Date;
 
     @OneToMany(()=> Activy, activy => activy.course_unit)
-    activies: Activy[]
+    activies: Activy[];
 
 }
 
