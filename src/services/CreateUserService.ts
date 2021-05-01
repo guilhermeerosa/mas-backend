@@ -1,5 +1,6 @@
-import { getRepository } from 'typeorm';
-import { User } from '../models/User';
+import { hash } from "bcryptjs";
+import { getRepository } from "typeorm"
+import { User } from "../models/User"
 
 interface UserData {
     name: string;
@@ -8,18 +9,30 @@ interface UserData {
 }
 
 class CreateUserService {
-    async execute({ name, email, password }: UserData) {
-        const userRepository = getRepository(User);
 
-        const user = userRepository.create({
+    public async execute({name, email, password}: UserData){
+
+        const usersRepository = getRepository(User);
+
+        const checkUserExist = await usersRepository.findOne({email});
+
+        if (checkUserExist) {
+            throw new Error('This email already exist')
+        }
+
+        const hashedPassword = await hash(password, 8);
+
+        const user = usersRepository.create({
             name,
             email,
-            password
+            password: hashedPassword
         });
 
-        await userRepository.save(user);
+        await usersRepository.save(user);
+
         return user;
+
     }
 }
 
-export { CreateUserService };
+export { CreateUserService }
