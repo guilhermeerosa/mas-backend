@@ -1,41 +1,16 @@
 import {Request, Response, Router} from 'express';
+import { ActivyController } from './controller/ActivyController';
+import { CourseUnitController } from './controller/CourseUnitController';
+import { UserController } from './controller/UserController';
+
+const userController = new UserController();
+const activyController = new ActivyController();
+const courseUnitController = new CourseUnitController();
 
 const routes = Router();
 
-// routes.get('/user', (request, response) => response.json({
-//     message:'Hello World'
-// }));
-
-// localhost:3333/user/1
-routes.get('/user/:id/', (request: Request, response: Response) => {
-    const {id} = request.params;
-    response.json({
-    userId:id
-    })
-})
-
-// localhost:3333/user?nome=guilherme&idade=28
-routes.get('/user/', (request: Request, response: Response) => {
-
-    const {nome, idade} = request.query
-
-    response.json({
-        nome: nome,
-        idade: idade
-    })
-})
-
-routes.post('/user', (request: Request, response: Response) => {
-
-    const {name, email, password} = request.body
-
-    const user = {
-    name,
-    email,
-    password
-    }
-
-    return response.json(user);
-    })
+routes.post('/user/new', userController.create);
+routes.post('/activy/new', activyController.create);
+routes.post('/course-unit/new', courseUnitController.create);
 
 export default routes;
