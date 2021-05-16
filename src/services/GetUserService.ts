@@ -9,12 +9,6 @@ class GetUserService {
 
     public async execute({id}: UserData) {
 
-        if (!id) {
-            return {
-                error: "id not found"
-            }
-        }
-
         const usersRepository = getRepository(User);
 
         const user = await usersRepository.findOne({id});

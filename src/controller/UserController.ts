@@ -14,7 +14,7 @@ class UserController {
     }
 
     async show(request: Request, response: Response){
-        const userData = request.body;
+        const userData = request.body.user;
 
         const getUser = new GetUserService();
 
