@@ -21,6 +21,9 @@ class Activy {
     @Column()
     activy_date: Date;
 
+    @Column()
+    grade: number;
+
     @CreateDateColumn()
     created_at: Date;
 

@@ -5,12 +5,13 @@ import { CourseUnit } from "../models/CourseUnit";
 interface activyData {
     name: string;
     activy_date: Date;
+    grade: number;
     course_unit: CourseUnit;
 }
 
 class CreateActivyService {
 
-    public async execute({ name, activy_date, course_unit }: activyData) {
+    public async execute({ name, activy_date, grade, course_unit }: activyData) {
 
         const activiesRepository = getRepository(Activy);
 
@@ -23,6 +24,7 @@ class CreateActivyService {
         const activy = activiesRepository.create({
             name,
             activy_date,
+            grade,
             course_unit
         });
 
