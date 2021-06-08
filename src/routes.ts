@@ -17,8 +17,10 @@ routes.post('/user/new', userController.create);
 
 routes.post('/auth/new', authenticadeController.create)
 
+routes.get('/activy', authenticated, activyController.show)
 routes.post('/activy/new', authenticated, activyController.create);
 
+routes.get('/course-unit', authenticated, courseUnitController.show)
 routes.post('/course-unit/new', authenticated, courseUnitController.create);
 
 export default routes;
