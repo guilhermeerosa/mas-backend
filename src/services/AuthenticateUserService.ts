@@ -11,7 +11,7 @@ interface AuthData {
 }
 
 class AuthenticadeUserService {
-    public async execute({email, password}: AuthData) {
+    public async execute({email, password}: AuthData): Promise<String | {}> {
 
         const userRepository = getRepository(User);
 
@@ -23,7 +23,7 @@ class AuthenticadeUserService {
             }
         }
 
-        const comparePassword = compare(password, user.password);
+        const comparePassword = await compare(password, user.password);
 
         if (!comparePassword) {
             return {
@@ -39,7 +39,16 @@ class AuthenticadeUserService {
             expiresIn
         });
 
-        return token;
+        const {id, name, email:emailUser} = user
+
+        return {
+            user: {
+                id,
+                name,
+                email:emailUser
+            },
+            token
+        };
     }
 
 }

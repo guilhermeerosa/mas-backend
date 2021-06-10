@@ -15,7 +15,7 @@ const routes = Router();
 routes.get('/user', authenticated, userController.show);
 routes.post('/user/new', userController.create);
 
-routes.post('/auth/new', authenticadeController.create)
+routes.post('/auth', authenticadeController.create)
 
 routes.get('/activy', authenticated, activyController.show)
 routes.post('/activy/new', authenticated, activyController.create);
